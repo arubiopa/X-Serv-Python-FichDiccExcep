@@ -1,13 +1,19 @@
-#!/usr/bin/python
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# hola, hola
+fich = open('/etc/passwd','r')
+lista = fich.readlines()
+fich.close()
+dicc = {}
 
-fd = open('/etc/passwd', 'r')
+for linea in lista:
+    lista2 = linea.split(':')
+    dicc[lista2[0]] = lista2[-1][:-1]
 
-lineas = fd.readlines()
-fd.close()
+print dicc['root']
+print len(lista)
 
-for linea in lineas:
-    elementos = linea.split(':')
-    print elementos[0], elementos[-1][:-1]
+try:
+	print dicc["imaginario"]
+except KeyError:
+	print "El usuario imaginario no existe"
